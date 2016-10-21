@@ -14,9 +14,6 @@ description: |
 confinement: strict
 grade: devel
 
-hooks:
-    configure
-
 apps:
     wekan:
         command: wekan-control start_node
