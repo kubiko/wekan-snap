@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get wekan/mongo settings
-source $SNAP_COMMON/wekan_setttings.sh
+source $SNAP/bin/wekan-read-settings
 
 # make sure we have set minimum env variables for locale
 if [ -z "$LANG" ]; then$
