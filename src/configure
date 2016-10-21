@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# settings were altered by user, safest way to get them applied is to restart service
+wekan.restart

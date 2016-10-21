@@ -75,4 +75,3 @@ parts:
             mongod-control: bin/mongod-control
             wekan-read-settings: bin/wekan-read-settings
             configure: meta/hooks/configure
-            upgrade: meta/hooks/upgrade
