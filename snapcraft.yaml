@@ -1,0 +1,77 @@
+name: wekan 
+version: "0.10.1-1" 
+summary: wekan 
+description: |
+   wekan colaboration tool
+   depending on your environment, you might need to alter some configuration
+   configuration:
+     - mongodb binding port: $ snap set wekan MONGO_PORT="2017"
+     - mondodb binding IP address: $ snap set wekan MONGO_BIND_IP="127.0.0.1"
+     - port wekan is exposed on: $ snap set wekan PORT="8080"
+     - wekan root url: $ snap set wekan ROOT_URL="http://127.0.0.1:8080"
+     - wekan's bind to mail server: $ snap set wekan MAIL_URL="smtp://user:pass@mailserver.examples.com:25/"
+
+confinement: strict
+grade: devel
+
+hooks:
+    configure
+
+apps:
+    wekan:
+        command: wekan-control start_node
+        daemon: simple
+        plugs: [network, network-bind]
+
+    mongodb:
+        command: mongod-control
+        daemon: simple
+        plugs: [network, network-bind]
+
+    mongodb-start:
+        command: mongod-control
+        plugs: [network, network-bind]
+
+    start:
+        command: wekan-control start
+        plugs: [network, network-bind]
+
+    stop:
+        command: wekan-control stop
+        plugs: [network, network-bind]
+
+    status:
+        command: wekan-control status
+        plugs: [network, network-bind]
+
+    restart:
+        command: wekan-control restart
+        plugs: [network, network-bind]
+
+parts:
+    wekan:
+        source: https://github.com/wekan/wekan/releases/download/v0.10.1/wekan-0.10.1.tar.gz
+        plugin: dump
+        organize:
+            README: README.wekan
+        stage:
+            - -README
+
+    nodejs:
+        source: parts/wekan/install/programs/server/
+        plugin: nodejs
+        node-packages: [npm, forever]
+        node-engine: 0.10.40
+        after: [mongodb, wekan]
+        organize:
+            lib/node_modules/meteor-dev-bundle/npm-shrinkwrap.json: programs/server/npm-shrinkwrap.json
+            lib/node_modules/meteor-dev-bundle/node_modules: programs/server/node_modules
+
+    helpers:
+        source: src
+        plugin: dump
+        organize:
+            wekan-control: bin/wekan-control
+            mongod-control: bin/mongod-control
+            configure: meta/hooks/configure
+            upgrade: meta/hooks/upgrade
