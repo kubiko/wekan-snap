@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# mongodb binding
+# MONGO_PORT=27017
+if ! MONGO_PORT=$(snapctl get MONGO_PORT); then
+    echo "No MONGO_PORT setting found, using default value"
+    MONGO_PORT=27017
+fi
+echo "MONGO_PORT=$MONGO_PORT"
+
+# MONGO_BIND_IP=127.0.0.1
+if ! MONGO_BIND_IP=$(snapctl get MONGO_BIND_IP); then
+    echo "No MONGO_BIND_IP setting found, using default value"
+    MONGO_BIND_IP=127.0.0.1
+fi
+echo "MONGO_BIND_IP=$MONGO_BIND_IP"
+
+
+# PORT="8080"
+snapctl set PORT="8080"
+
+# MAIL_URL="smtp://user:pass@mailserver.examples.com:25/"
+if ! MAIL_URL=$(snapctl get MAIL_URL); then
+    echo "No MAIL_URL setting, skipping"
+fi
+echo "MAIL_URL=$MAIL_URL"
+
+
+# ROOT_URL http://127.0.0.1(:8080)
+if ! ROOT_URL=$(snapctl get ROOT_URL); then
+    echo "No ROOT_URL setting found, using default value"
+    ROOT_URL=http://127.0.0.1:8080
+fi
+echo "ROOT_URL=$ROOT_URL"
+export ROOT_URL=$ROOT_URL
+
+# PORT="8080"
+if ! PORT=$(snapctl get PORT); then
+    echo "No PORT settings found, using default value"
+    PORT="8080"
+fi
+echo "PORT=$PORT"
+export PORT=$PORT
