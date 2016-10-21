@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# get wekan/mongo settings
+source $SNAP_COMMON/wekan_setttings.sh
+
+export NODE_PATH=$SNAP/bin
+export MONGO_URL="mongodb://$MONGO_BIND_IP:$MONGO_PORT/wekan"
+
+APPLICATION_DIRECTORY=$SNAP
+APPLICATION_START=main.js
+
+SYSTEMD_WEKAN_SERVICE="snap.wekan.wekan.service"
+SYSTEMD_MONGODB_SERVICE="snap.wekan.mongodb.service"
+
+# do not use this directly, this should be used directly by systemd
+start_node() {
+    cd $APPLICATION_DIRECTORY
+    $NODE_PATH/node $APPLICATION_START
+}
+
+start() {
+    systemctl start $SYSTEMD_MONGODB_SERVICE
+    systemctl start $SYSTEMD_WEKAN_SERVICE
+}
+
+status() {
+	echo "Status for wekan snap. Wekan consist of two services, supporting mongodb and wekan itself"
+	systemctl status $SYSTEMD_WEKAN_SERVICE
+        systemctl status $SYSTEMD_MONGODB_SERVICE
+}
+
+stop() {
+    systemctl stop $SYSTEMD_WEKAN_SERVICE
+    systemctl stop $SYSTEMD_MONGODB_SERVICE
+}
+
+restart() {
+    # do this manually, as we want services to start in order
+    stop
+    start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  start_node)
+        start_node
+        ;;
+  stop)
+	stop
+	;;
+  status)
+	status
+	;;
+  restart)
+	restart
+	;;
+  *)
+	echo "Usage: wekan.{start|stop|status|restart}"
+	exit 1
+	;;
+esac
