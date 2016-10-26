@@ -1,37 +1,39 @@
 #!/bin/bash
 
-# get wekan/mongo settings
-source $SNAP/bin/wekan-read-settings
-
-export NODE_PATH=$SNAP/bin
-export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
-
-APPLICATION_DIRECTORY=$SNAP
-APPLICATION_START=main.js
-
 SYSTEMD_WEKAN_SERVICE="snap.wekan.wekan.service"
 SYSTEMD_MONGODB_SERVICE="snap.wekan.mongodb.service"
 
 # do not use this directly, this should be used directly by systemd
 start_node() {
+    # get wekan/mongo settings
+    source $SNAP/bin/wekan-read-settings
+
+    export NODE_PATH=$SNAP/bin
+    export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
+
+    APPLICATION_DIRECTORY=$SNAP
+    APPLICATION_START=main.js
     cd $APPLICATION_DIRECTORY
     $NODE_PATH/node $APPLICATION_START
 }
 
 start() {
-    systemctl start $SYSTEMD_MONGODB_SERVICE
-    systemctl start $SYSTEMD_WEKAN_SERVICE
+    echo "Wekan consist of two services, start them in order"
+    echo "call $ sudo systemctl start $SYSTEMD_MONGODB_SERVICE"
+    echo "call $ sudo systemctl start $SYSTEMD_WEKAN_SERVICE"
 }
 
 status() {
-	echo "Status for wekan snap. Wekan consist of two services, supporting mongodb and wekan itself"
-	systemctl status $SYSTEMD_WEKAN_SERVICE
-        systemctl status $SYSTEMD_MONGODB_SERVICE
+	echo "Status for wekan snap"
+  echo "Wekan consist of two services, check both"
+	echo "call $ sudo systemctl status $SYSTEMD_WEKAN_SERVICE"
+  echo "call $ sudo systemctl status $SYSTEMD_MONGODB_SERVICE"
 }
 
 stop() {
-    systemctl stop $SYSTEMD_WEKAN_SERVICE
-    systemctl stop $SYSTEMD_MONGODB_SERVICE
+    echo "Wekan consist of two services"
+    echo "call $ sudo systemctl stop $SYSTEMD_WEKAN_SERVICE"
+    echo "call $ sudo systemctl stop $SYSTEMD_MONGODB_SERVICE"
 }
 
 restart() {
