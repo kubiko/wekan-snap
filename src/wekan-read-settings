@@ -11,7 +11,8 @@ DEFAULT_MAIL_FROM="wekan-admin@example.com"
 # wekan root url, ROOT_URL http://127.0.0.1(:8080), https://example.com, https://wekan.example.com, http://example.com/wekan,
 DEFAULT_ROOT_URL="http://127.0.0.1"
 DEFAULT_PORT="8080"
-# list of supporting keys
+
+# list of supported keys
 keys=("MONGODB_PORT" "MONGODB_BIND_IP" "MAIL_URL" "MAIL_FROM" "ROOT_URL" "PORT")
 
 # TODO: uncomment folling, once snapctl can be called from outside the hooks
