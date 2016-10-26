@@ -26,7 +26,7 @@ apps:
         plugs: [network, network-bind]
 
     mongodb:
-        command: mongod-control
+        command: mongodb-control
         daemon: simple
         plugs: [network, network-bind]
 
@@ -70,6 +70,6 @@ parts:
         plugin: dump
         organize:
             wekan-control: bin/wekan-control
-            mongod-control: bin/mongod-control
+            mongodb-control: bin/mongodb-control
             wekan-read-settings: bin/wekan-read-settings
             configure: meta/hooks/configure
