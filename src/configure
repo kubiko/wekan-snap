@@ -1,4 +1,34 @@
 #!/bin/sh
 
 # settings were altered by user, safest way to get them applied is to restart service
-wekan.restart
+
+# for the moment we can't read settings outside of the hook,
+# so store all settings in helpper script which is then picked by main wrapper
+#
+# get wekan/mongo settings
+# we should not need this once snapctl can store keys for us
+SETTINGS_FILE="$SNAP_COMMON/wekan_settings.sh"
+if [ -f $SETTINGS_FILE ]; then
+    source $SETTINGS_FILE
+fi
+
+echo "#!/bin/sh\n" > $SETTINGS_FILE
+
+# check all the settings
+for key in ${keys[@]}
+do
+  if value=$(snapctl get $key); then
+      echo "export $key='$value'" >> $SETTINGS_FILE
+  else if [ -z "${!key}" ]; then
+      # store back value from SETTINGS_FILE
+      echo "export $key='${!key}'" >> $SETTINGS_FILE
+  fi
+done
+
+# set file executable
+chmod 755 $SETTINGS_FILE
+# we can't use snapctl to restart service, may be one day ....
+# not
+echo "Setting has been updated, restart service.\n
+$sudo systemctl restart snap.wekan.mongodb.service\n
+$sudo systemctl restart snap.wekan.wekan.service"
