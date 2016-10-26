@@ -15,6 +15,8 @@ fi
 echo "#!/bin/sh\n" > $SETTINGS_FILE
 
 # check all the settings
+# list of supported keys
+keys=("MONGODB_PORT" "MONGODB_BIND_IP" "MAIL_URL" "MAIL_FROM" "ROOT_URL" "PORT")
 for key in ${keys[@]}
 do
   if value=$(snapctl get $key); then
