@@ -4,7 +4,7 @@
 source $SNAP/bin/wekan-read-settings
 
 export NODE_PATH=$SNAP/bin
-export MONGO_URL="mongodb://$MONGO_BIND_IP:$MONGO_PORT/wekan"
+export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
 
 APPLICATION_DIRECTORY=$SNAP
 APPLICATION_START=main.js
