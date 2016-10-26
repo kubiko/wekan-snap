@@ -21,7 +21,7 @@ for key in ${keys[@]}
 do
   if value=$(snapctl get $key); then
       echo "export $key='$value'" >> $SETTINGS_FILE
-  else if [ -z "${!key}" ]; then
+  elif [ -d "${!key}" ]; then
       # store back value from SETTINGS_FILE
       echo "export $key='${!key}'" >> $SETTINGS_FILE
   fi
