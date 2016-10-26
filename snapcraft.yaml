@@ -30,10 +30,6 @@ apps:
         daemon: simple
         plugs: [network, network-bind]
 
-    mongodb-start:
-        command: mongod-control
-        plugs: [network, network-bind]
-
     start:
         command: wekan-control start
         plugs: [network, network-bind]
