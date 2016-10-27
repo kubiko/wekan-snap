@@ -46,6 +46,9 @@ apps:
         command: wekan-control restart
         plugs: [network, network-bind]
 
+    help:
+        command: wekan-help help
+
 parts:
     wekan:
         source: https://github.com/wekan/wekan/releases/download/v0.10.1/wekan-0.10.1.tar.gz
@@ -72,5 +75,6 @@ parts:
             wekan-control: bin/wekan-control
             mongodb-control: bin/mongodb-control
             wekan-read-settings: bin/wekan-read-settings
+            wekan-help: bin/wekan-help
             config: bin/config
             configure: meta/hooks/configure
