@@ -2,7 +2,7 @@
 
 source $SNAP/bin/config &>/dev/null
 
-echo -e "Welcone to brave new snappy world\n"
+echo -e "Wekan: The open-source Trello-like kanban.\n"
 echo -e "Make sure you have connected all interfaces, check more by calling $ snap interfaces"
 # parse config file for supported settings keys
 echo -e "\nwekan supports settings keys"
@@ -15,3 +15,7 @@ do
     echo -e "\t${key}:   ${!description}"
     echo -e "\t\tdefault value: '${!default_value}', current value: '${!key}'"
 done
+echo -e "\nFor changes to take effect restart wekan service,"
+echo -e "if mongodb key was change also restart mongodb service, before restaring wekan"
+echo -e "to restart mongodb: $ sudo systemctl restart snap.wekan.mongodb.service"
+echo -e "to restart wekan:   $ sudo systemctl restart snap.wekan.wekan.service"
