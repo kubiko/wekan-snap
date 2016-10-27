@@ -61,7 +61,7 @@ parts:
     nodejs:
         source: parts/wekan/install/programs/server/
         plugin: nodejs
-        node-packages: [npm, forever]
+        node-packages: [npm]
         node-engine: 0.10.40
         after: [mongodb, wekan]
         organize:
