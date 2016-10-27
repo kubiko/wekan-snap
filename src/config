@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# store here all configuration for wekan snap
+
+# TODO: get rid of this workaround once above can be used
+SETTINGS_FILE="$SNAP_COMMON/wekan_settings.sh"
+[ -f $SETTINGS_FILE ] && source $SETTINGS_FILE
+
+# list of supported keys
+keys=("MONGODB_PORT" "MONGODB_BIND_IP" "MAIL_URL" "MAIL_FROM" "ROOT_URL" "PORT")
+
+# default values
+# mongodb binding port, MONGODB_PORT
+DEFAULT_MONGODB_PORT="27017"
+# mongodb binding address, MONGODB_BIND_IP
+DEFAULT_MONGODB_BIND_IP="127.0.0.1"
+# wekan mail binding, MAIL_URL
+DEFAULT_MAIL_URL="smtp://user:pass@mailserver.examples.com:25/"
+# wekan default mail from name
+DEFAULT_MAIL_FROM="wekan-admin@example.com"
+# wekan root url, ROOT_URL http://127.0.0.1(:8080), https://example.com, https://wekan.example.com, http://example.com/wekan,
+DEFAULT_ROOT_URL="http://127.0.0.1"
+DEFAULT_PORT="8080"

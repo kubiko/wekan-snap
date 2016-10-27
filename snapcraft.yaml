@@ -72,4 +72,5 @@ parts:
             wekan-control: bin/wekan-control
             mongodb-control: bin/mongodb-control
             wekan-read-settings: bin/wekan-read-settings
+            config: bin/config
             configure: meta/hooks/configure
