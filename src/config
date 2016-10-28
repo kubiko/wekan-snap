@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
 # store here all configuration for wekan snap
 
 # TODO: get rid of this workaround once above can be used
 SETTINGS_FILE="$SNAP_COMMON/wekan_settings.sh"
-[ -f $SETTINGS_FILE ] && source $SETTINGS_FILE
+[ -f $SETTINGS_FILE ] && . $SETTINGS_FILE
 
 # list of supported keys
-keys=("MONGODB_PORT" "MONGODB_BIND_IP" "MAIL_URL" "MAIL_FROM" "ROOT_URL" "PORT")
+keys="MONGODB_PORT MONGODB_BIND_IP MAIL_URL MAIL_FROM ROOT_URL PORT"
 
 # default values
 DESCRIPTION_MONGODB_PORT="mongodb binding port"
