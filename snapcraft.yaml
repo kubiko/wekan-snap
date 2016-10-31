@@ -17,7 +17,7 @@ description: |
      - MAIL_FROM: wekan's admin email address, no default value, example value 'wekan-admin@example.com'
 
 confinement: strict
-grade: devel
+grade: stable
 
 apps:
     wekan:
