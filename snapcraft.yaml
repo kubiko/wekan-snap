@@ -50,6 +50,20 @@ apps:
         command: wekan-help help
 
 parts:
+    mongodb:
+        source: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-3.2.10.tgz
+        plugin: dump
+        stage-packages: [libssl1.0.0]
+        filesets:
+            mongo:
+                - usr
+                - bin
+                - lib
+        stage:
+            - $mongo
+        snap:
+            - $mongo
+
     wekan:
         source: https://github.com/wekan/wekan/releases/download/v0.10.1/wekan-0.10.1.tar.gz
         plugin: dump
@@ -63,7 +77,7 @@ parts:
         plugin: nodejs
         node-packages: [npm]
         node-engine: 0.10.43
-        after: [mongodb, wekan]
+        after: [wekan]
         organize:
             lib/node_modules/meteor-dev-bundle/npm-shrinkwrap.json: programs/server/npm-shrinkwrap.json
             lib/node_modules/meteor-dev-bundle/node_modules: programs/server/node_modules
