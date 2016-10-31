@@ -62,7 +62,7 @@ parts:
         source: parts/wekan/install/programs/server/
         plugin: nodejs
         node-packages: [npm]
-        node-engine: 0.10.40
+        node-engine: 0.10.43
         after: [mongodb, wekan]
         organize:
             lib/node_modules/meteor-dev-bundle/npm-shrinkwrap.json: programs/server/npm-shrinkwrap.json
