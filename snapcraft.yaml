@@ -19,6 +19,10 @@ description: |
 confinement: strict
 grade: stable
 
+hooks:
+    configure:
+        plugs: [network-bind]
+
 apps:
     wekan:
         command: wekan-control start_node
