@@ -70,21 +70,23 @@ parts:
 
     wekan:
         source: https://github.com/wekan/wekan/releases/download/v0.11.0-rc2/wekan-0.11.0-rc2.tar.gz
-        plugin: dump
-        organize:
-            README: README.wekan
-        stage:
-            - -README
-
-    nodejs:
-        source: parts/wekan/install/programs/server/
+        source-subdir: programs/server
         plugin: nodejs
         node-packages: [npm]
-        node-engine: 0.10.43
-        after: [wekan]
+        node-engine: 0.10.48
+        filesets:
+            bundle:
+                - main.js
+                - star.json
+                - programs
+                - server
+                - .node_version.txt
+        stage:
+            - $bundle
+        snap:
+            - $bundle
         organize:
-            lib/node_modules/meteor-dev-bundle/npm-shrinkwrap.json: programs/server/npm-shrinkwrap.json
-            lib/node_modules/meteor-dev-bundle/node_modules: programs/server/node_modules
+            README: README.wekan
 
     helpers:
         source: src
