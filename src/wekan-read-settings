@@ -3,16 +3,19 @@
 # read wekan config
 source $SNAP/bin/config
 
-# TODO: uncomment folling, once snapctl can be called from outside the hooks
+# TODO: uncomment following, once snapctl can be called from outside the hooks
 # for key in ${keys[@]}
 # do
-#   if value=$(snapctl get $key); then
+#   # snappy is picky about key syntax, using mapping
+#   MAP_KEY="KEY_$key"
+#   SNAPPY_KEY=
+#   if value=$(snapctl get '${!MAP_KEY}'); then
 #       echo "$key='$value'"
 #       export $key=$value
 #   else
 #       # use default value
 #       default_value="DEFAULT_$key"
-#       echo "using default value: $key=${!default_value}'"
+#       echo "using default value: $key='${!default_value}'"
 #       export $key=${!default_value}
 #   fi
 # done
