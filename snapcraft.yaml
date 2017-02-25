@@ -19,10 +19,6 @@ description: |
 confinement: strict
 grade: stable
 
-hooks:
-    configure:
-        plugs: [network-bind]
-
 apps:
     wekan:
         command: wekan-control start_node
@@ -65,26 +61,20 @@ parts:
                 - lib
         stage:
             - $mongo
-        snap:
+        prime:
             - $mongo
 
     wekan:
-        source: https://github.com/wekan/wekan/releases/download/v0.11.0-rc2/wekan-0.11.0-rc2.tar.gz
+        source: https://github.com/wekan/wekan/releases/download/v0.11.1-rc1/wekan-0.11.1-rc1.tar.gz
         source-subdir: programs/server
         plugin: nodejs
         node-packages: [npm]
         node-engine: 0.10.48
-        filesets:
-            bundle:
-                - main.js
-                - star.json
-                - programs
-                - server
-                - .node_version.txt
-        stage:
-            - $bundle
-        snap:
-            - $bundle
+        build-packages:
+            - python
+        install: |
+            cp -r * $SNAPCRAFT_PART_INSTALL/
+            cp .node_version.txt $SNAPCRAFT_PART_INSTALL/
         organize:
             README: README.wekan
 
