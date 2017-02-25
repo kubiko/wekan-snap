@@ -9,7 +9,7 @@ source $SNAP/bin/config
 #   # snappy is picky about key syntax, using mapping
 #   MAP_KEY="KEY_$key"
 #   SNAPPY_KEY=
-#   if value=$(snapctl get '${!MAP_KEY}'); then
+#   if value=$(snapctl get ${!MAP_KEY}); then
 #       echo "$key='$value'"
 #       export $key=$value
 #   else
