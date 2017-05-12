@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# get wekan/mongo settings
+source $SNAP/bin/wekan-read-settings
+
+# make sure we have set minimum env variables for locale
+if [ -z "$LANG" ]; then
+    export LANG=en_US.UTF-8
+fi
+
+export LC_ALL=C
+
+if [ -z $1 ]; then
+    DATE=`/bin/date +%Y%m%dT%H%M%S`
+    mkdir -p $SNAP_COMMON/db-backups/
+    ARCHIVE=$SNAP_COMMON/db-backups/wekan-$DATE.backup
+else
+    ARCHIVE=$1
+fi
+# start mongodb backup
+if [ "x" == "x${MONGODB_BIND_IP}" ]; then
+    echo "using  unix socket: this is likely not going to work: https://jira.mongodb.org/browse/TOOLS-620"
+    echo "configure mongodb binding to ip bind instead"
+    mongodump --host $SNAP_DATA/mongodb-27017.sock -d wekan --gzip  --archive=${ARCHIVE}
+else
+    if [ "x" == "x${MONGODB_PORT}" ]; then
+        echo "using bind ip"
+        mongodump --host $MONGODB_BIND_IP -d wekan --gzip  --archive=${ARCHIVE}
+    else
+        echo "using bind ip"
+        mongodump --host $MONGODB_BIND_IP --port $MONGODB_PORT -d wekan --gzip  --archive=${ARCHIVE}
+    fi
+fi

@@ -26,6 +26,17 @@ apps:
     help:
         command: wekan-help help
 
+    database-backup:
+        command: mongodb-backup
+        plugs: [network, network-bind]
+
+    database-list-backups:
+        command: ls -ald $SNAP_COMMON/db-backups/*
+
+    database-restore:
+        command: mongodb-restore
+        plugs: [network, network-bind]
+
 parts:
     mongodb:
         source: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-3.4.3.tgz
