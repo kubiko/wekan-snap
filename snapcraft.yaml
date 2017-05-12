@@ -77,4 +77,3 @@ parts:
             mongodb-backup: bin/mongodb-backup
             mongodb-restore: bin/mongodb-restore
             config: bin/config
-            configure: meta/hooks/configure
