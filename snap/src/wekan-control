@@ -3,72 +3,22 @@
 SYSTEMD_WEKAN_SERVICE="snap.${SNAP_NAME}.wekan"
 SYSTEMD_MONGODB_SERVICE="snap.${SNAP_NAME}.mongodb"
 
-# do not use this directly, this should be used directly by systemd
-start_node() {
-    # get wekan/mongo settings
-    source $SNAP/bin/wekan-read-settings
+# get wekan/mongo settings
+source $SNAP/bin/wekan-read-settings
 
-    export NODE_PATH=$SNAP/bin
-    if [ "x" == "x$MONGODB_BIND_IP" ]; then
-        export MONGO_URL="mongodb://$SNAP_DATA/mongodb-27017.sock"
-        echo "Mongo bind ip not defined, using default Unix socket: $MONGO_URL"
+export NODE_PATH=$SNAP/bin
+if [ "x" == "x$MONGODB_BIND_IP" ]; then
+    export MONGO_URL="mongodb://$SNAP_DATA/mongodb-27017.sock"
+    echo "Mongo bind ip not defined, using default Unix socket: $MONGO_URL"
+else
+    if [ "x" == "x$MONGODB_PORT" ]; then
+        export MONGO_URL="mongodb://$MONGODB_BIND_IP/wekan"
     else
-        if [ "x" == "x$MONGODB_PORT" ]; then
-            export MONGO_URL="mongodb://$MONGODB_BIND_IP/wekan"
-        else
-            export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
-        fi
+        export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
     fi
+fi
 
-    APPLICATION_DIRECTORY=$SNAP
-    APPLICATION_START=main.js
-    cd $APPLICATION_DIRECTORY
-    $NODE_PATH/node $APPLICATION_START
-}
-
-start() {
-    echo "Wekan consist of two services, start them in order"
-    echo "call $ sudo systemctl start $SYSTEMD_MONGODB_SERVICE"
-    echo "call $ sudo systemctl start $SYSTEMD_WEKAN_SERVICE"
-}
-
-status() {
-	echo "Status for wekan snap"
-  echo "Wekan consist of two services, check both"
-	echo "call $ sudo systemctl status $SYSTEMD_WEKAN_SERVICE"
-  echo "call $ sudo systemctl status $SYSTEMD_MONGODB_SERVICE"
-}
-
-stop() {
-    echo "Wekan consist of two services"
-    echo "call $ sudo systemctl stop $SYSTEMD_WEKAN_SERVICE"
-    echo "call $ sudo systemctl stop $SYSTEMD_MONGODB_SERVICE"
-}
-
-restart() {
-    # do this manually, as we want services to start in order
-    stop
-    start
-}
-
-case "$1" in
-  start)
-	start
-	;;
-  start_node)
-        start_node
-        ;;
-  stop)
-	stop
-	;;
-  status)
-	status
-	;;
-  restart)
-	restart
-	;;
-  *)
-	echo "Usage: wekan.{start|stop|status|restart}"
-	exit 1
-	;;
-esac
+APPLICATION_DIRECTORY=$SNAP
+APPLICATION_START=main.js
+cd $APPLICATION_DIRECTORY
+$NODE_PATH/node $APPLICATION_START

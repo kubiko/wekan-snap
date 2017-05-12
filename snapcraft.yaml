@@ -14,29 +14,13 @@ grade: stable
 
 apps:
     wekan:
-        command: wekan-control start_node
+        command: wekan-control
         daemon: simple
         plugs: [network, network-bind]
 
     mongodb:
         command: mongodb-control
         daemon: simple
-        plugs: [network, network-bind]
-
-    start:
-        command: wekan-control start
-        plugs: [network, network-bind]
-
-    stop:
-        command: wekan-control stop
-        plugs: [network, network-bind]
-
-    status:
-        command: wekan-control status
-        plugs: [network, network-bind]
-
-    restart:
-        command: wekan-control restart
         plugs: [network, network-bind]
 
     help:
