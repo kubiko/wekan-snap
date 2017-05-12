@@ -74,5 +74,7 @@ parts:
             mongodb-control: bin/mongodb-control
             wekan-read-settings: bin/wekan-read-settings
             wekan-help: bin/wekan-help
+            mongodb-backup: bin/mongodb-backup
+            mongodb-restore: bin/mongodb-restore
             config: bin/config
             configure: meta/hooks/configure
