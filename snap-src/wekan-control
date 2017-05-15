@@ -7,17 +7,19 @@ SYSTEMD_MONGODB_SERVICE="snap.${SNAP_NAME}.mongodb"
 source $SNAP/bin/wekan-read-settings
 
 export NODE_PATH=$SNAP/bin
-if [ "x" == "x$MONGODB_BIND_IP" ]; then
-    export MONGO_URL="mongodb://$SNAP_DATA/mongodb-27017.sock"
-    echo "Mongo bind ip not defined, using default Unix socket: $MONGO_URL"
-else
-    if [ "x" == "x$MONGODB_PORT" ]; then
-        export MONGO_URL="mongodb://$MONGODB_BIND_IP/wekan"
+# if possible we prefer to bind over unix socket
+if [ "nill" != "$MONGODB_BIND_UNIX_SOCKET" ] && [ "x" != "x$MONGODB_BIND_UNIX_SOCKET" ]; then
+    if [ -d $MONGODB_BIND_UNIX_SOCKET ]; then
+        export MONGO_URL="mongodb://$MONGODB_BIND_UNIX_SOCKET/mongodb-${MONGODB_PORT}.sock"
     else
-        export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
+        export MONGO_URL="mongodb://$SNAP_DATA/shared/$MONGODB_BIND_UNIX_SOCKET"
     fi
+else
+    [ "x" == "x$MONGODB_BIND_IP" ] && MONGODB_BIND_IP="127.0.0.1"
+    export MONGO_URL="mongodb://$MONGODB_BIND_IP:$MONGODB_PORT/wekan"
 fi
 
+echo -e "MONGO_URL=$MONGO_URL"
 APPLICATION_DIRECTORY=$SNAP
 APPLICATION_START=main.js
 cd $APPLICATION_DIRECTORY

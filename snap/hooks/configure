@@ -3,6 +3,10 @@
 # read wekan config
 . $SNAP/bin/config
 
+# create run dir, we're going to use it for unix socket
+mkdir -p $SNAP_DATA/share
+mkdir -p $SNAP_DATA/shared
+
 # settings were altered by user, safest way to get them applied is to restart service
 
 # TODO: remove this workaround once it's not needed

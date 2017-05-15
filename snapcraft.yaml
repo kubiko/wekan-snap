@@ -12,6 +12,17 @@ description: |
 confinement: strict
 grade: stable
 
+plugs:
+  mongodb-plug:
+    interface: content
+    target: $SNAP_DATA/shared
+
+slots:
+  mongodb-slot:
+    interface: content
+    write:
+      - $SNAP_DATA/share
+
 apps:
     wekan:
         command: wekan-control
@@ -67,7 +78,7 @@ parts:
             README: README.wekan
 
     helpers:
-        source: snap/src
+        source: snap-src
         plugin: dump
         organize:
             wekan-control: bin/wekan-control
