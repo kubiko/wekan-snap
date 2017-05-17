@@ -10,9 +10,9 @@ export NODE_PATH=$SNAP/bin
 # if possible we prefer to bind over unix socket
 if [ "nill" != "$MONGODB_BIND_UNIX_SOCKET" ] && [ "x" != "x$MONGODB_BIND_UNIX_SOCKET" ]; then
     if [ -d $MONGODB_BIND_UNIX_SOCKET ]; then
-        export MONGO_URL="mongodb://$MONGODB_BIND_UNIX_SOCKET/mongodb-${MONGODB_PORT}.sock"
+        export MONGO_URL="mongodb://$MONGODB_BIND_UNIX_SOCKET/mongodb-${MONGODB_PORT}.sock/wekan"
     else
-        export MONGO_URL="mongodb://$SNAP_DATA/shared/$MONGODB_BIND_UNIX_SOCKET"
+        export MONGO_URL="mongodb://$SNAP_DATA/shared/$MONGODB_BIND_UNIX_SOCKET/wekan"
     fi
 else
     [ "x" == "x$MONGODB_BIND_IP" ] && MONGODB_BIND_IP="127.0.0.1"
