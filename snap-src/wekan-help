@@ -43,6 +43,6 @@ do
     fi
 done
 echo -e "\nFor changes to take effect restart wekan service,"
-echo -e "if mongodb key was change also restart mongodb service, before restaring wekan"
+echo -e "if mongodb key was change also restart mongodb service, before restarting wekan"
 echo -e "to restart mongodb: $ sudo systemctl restart snap.$SNAP_NAME.mongodb"
 echo -e "to restart wekan:   $ sudo systemctl restart snap.$SNAP_NAME.wekan"
