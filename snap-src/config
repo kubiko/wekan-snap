@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # store here all configuration options for wekan snap
-SNAP_NAME="wekan-ondra"
+SNAP_NAME="wekan"
 
 # read configured settings first
 SETTINGS_FILE="$SNAP_COMMON/wekan_settings.sh"

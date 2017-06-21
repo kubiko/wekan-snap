@@ -7,10 +7,10 @@ wekan server packaged as a snap for Ubuntu core. It consists of:
 
 ## How to install
 
-This wekan snap is available in the Ubuntu store for release series 16 (e.g. Ubuntu 16.04). Search for wekan-ondra
+This wekan snap is available in the Ubuntu store for release series 16 (e.g. Ubuntu 16.04). Search for wekan
 
 ```
-$ sudo snap install wekan-ondra
+$ sudo snap install wekan
 ```
 
 At the moment only amd64 target is supported
