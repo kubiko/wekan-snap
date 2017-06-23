@@ -70,7 +70,7 @@ parts:
         source: https://github.com/wekan/wekan/releases/download/v0.24/wekan-0.24.tar.gz
         source-subdir: programs/server
         plugin: nodejs
-        node-packages: [npm]
+        node-packages: [npm@4.6.1]
         node-engine: 4.8.1
         build-packages:
             - python
