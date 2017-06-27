@@ -15,7 +15,7 @@ $ sudo snap install wekan
 
 At the moment only amd64 target is supported.
 
-Wekan at uappexplorer:
+Wekan is also at:
 
 https://uappexplorer.com/snap/ubuntu/wekan
 
