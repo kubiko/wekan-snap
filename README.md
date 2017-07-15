@@ -1,17 +1,22 @@
 # wekan-snap
 
-wekan server packaged as a snap for Ubuntu core. It consists of:
+[Wekan](https://wekan.github.io) server packaged as a snap for Ubuntu core. It consists of:
   - nodejs runtime
   - mongodb
   - wekan server implementation
 
-## How to install
+## Install
 
 This wekan snap is available in the Ubuntu store for release series 16 (e.g. Ubuntu 16.04). Search for wekan
 
 ```
 $ sudo snap install wekan
 ```
+
+[URL settings](https://github.com/wekan/wekan-snap/wiki/Install) needs to be
+configured for Wekan to work correctly.
+
+More documentation at the same [Wekan snap wiki](https://github.com/wekan/wekan-snap/wiki).
 
 At the moment only amd64 target is supported.
 
@@ -25,8 +30,12 @@ https://uappexplorer.com/snap/ubuntu/wekan
 $ wekan.help
 ```
 
-## How to use
+[Wekan snap Documentation](https://github.com/wekan/wekan-snap/wiki)
 
-After install, assuming you and the device on which it was installed are on the same network, you should be able to reach the wekan interface by visiting `<device address>`:8080 in your browser, for example http://localhost:8080 .
+[Wekan Documentation](https://github.com/wekan/wekan/wiki)
 
-For more information about wekan refer to https://github.com/wekan/wekan
+## Bug reports and feature requests
+
+[Wekan snap package issues](https://github.com/wekan/wekan-snap/issues)
+
+[Wekan issues](https://github.com/wekan/wekan/issues)
